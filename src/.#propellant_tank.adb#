@@ -1,0 +1,13 @@
+package body Propellant_Tank is
+
+   procedure Init(O: in Float, RF: in Float) is
+      P : Propellant_Tank;
+   begin
+      P.Max_O
+      
+   procedure D_O(T: in Float);
+   procedure D_RF(T: in Float);
+   function Get_P_O return Float; 
+   function Get_P_RF return Float;
+
+end Propellant_Tank;
