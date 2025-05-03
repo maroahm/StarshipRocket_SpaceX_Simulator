@@ -1,3 +1,5 @@
+with Util, Ada.Calendar;
+use Util,Ada.Calendar;
 package body Rocket_Stage is
 
    protected type Propellant_Tank is
@@ -46,9 +48,68 @@ package body Rocket_Stage is
       
       task body Raptor_Engine is
          type PStr is access String;
-         name: PStr;
+         Engine_Name: PStr;
+         Engine_Num:Integer;
+         Engine_Tank: Tank;
+         D: Duration;
+         T: Time:= Clock;
       begin
          
+         accept Init(S:String; N:Integer; PT:Tank) do
+            Engine_Name:= S;
+            Engine_Num:= N;
+            Engine_Tank:= PT;
+         end Init;
          
-
+         accept Engine_Start do
+            printer.P(Engine_Name & " engine " & Engine_Num "is starting");
+         end Engine_Start;
+         loop
+            select
+               accept Engine_Shut_Off do
+                  Printer.P(Engine_Name & " engine " & Engine_Num & " is shutting off");
+               end Engine_Shut_Off;
+               exit;
+            or
+               delay 0.1;
+               D:= Clock - T;
+               Engine_Tank.D_O(Float(D));
+               Engine_Tank.D_RF(Float(D));
+            end select;
+            
+         end loop;
+      end Raptor_Engine;
+      
+      task body Stage(Num_Engines: Natural) is
+         type Pstr is access String;
+         Stage_Name: Pstr;
+         Fuel_Tank: Tank;
+         Engines: Engine_Arr(1..Num_Engines);
+      begin
+         accept Init(S: String; PT: Tank) do
+            Stage_Name := S;
+            Fuel_Tank := PT; 
+         end Init;
+         accept Start_Engine do
+            Printer.P("Main Engines on" & Stage_Name & "Starting");
+            for I in Engines'Range loop
+               Engines(i).Engine_Start;
+            end loop;
+         end Start_Engine;
+         loop
+            select 
+               accept MECO do
+                  for I in Engines'Range loop
+                     Engines(i).Engine_Shut_Off;
+                  end loop;
+                  Printer.P("Main engines on " & Stage_Name & " shut down");
+               end MECO;
+               exit;
+            or
+               terminate;
+            end select;
+               
+         
+      end Stage;
+               
 end Rocket_Stage;

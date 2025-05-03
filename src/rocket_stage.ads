@@ -9,5 +9,27 @@ package Rocket_Stage is
       function Get_P_RF return Float;
       
    end Propellant_Tank;
+   
+   type Tank is access Propellant_Tank;
+   Core_Stage_Tank, Second_Stage_Tank: Tank;
+   
+   
+   task type Raptor_Engine is
+      entry Init(S:String; N:Integer; PT:Tank);
+      entry Engine_Start;
+      entry Engine_Shut_Off;
+   end Raptor_Engine;
+   
+   type Engine_Arr is array (Natural range <>) of Raptor_Engine;
+   
+   task type Stage(Num_Engines: Natural) is
+      entry Init(S: String; PT: Tank);
+      entry Start_Engines;
+      entry MECO;
+   end Stage;
+   
+   type En_Stage is access Stage;
+   
+   Core_Stage, Second_Stage: En_Stage;
 
 end Rocket_Stage;
