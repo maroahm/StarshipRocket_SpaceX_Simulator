@@ -1,3 +1,1 @@
-main.adb:8:04: warning: variable "Core_Stage_Tank" is never read and never assigned [-gnatwv]
-main.adb:8:21: warning: variable "Second_Stage_Tank" is never read and never assigned [-gnatwv]
-rocket_stage.ads:5:33: error: "," should be ";"
+main.adb:23:26: warning: loop range is null, loop will not execute [enabled by default]

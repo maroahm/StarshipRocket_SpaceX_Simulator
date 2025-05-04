@@ -3,37 +3,62 @@ M P W=b
 A -gnatA
 A -mtune=generic
 A -march=x86-64
-P ZX
+P SS ZX
 
 RN
+RV NO_ALLOCATORS
 RV NO_CALENDAR
 RV NO_DELAY
+RV NO_FIXED_POINT
 RV NO_FLOATING_POINT
 RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_ALLOCATORS
 RV NO_LOCAL_PROTECTED_OBJECTS
-RV NO_PROTECTED_TYPES
+RV NO_PROTECTED_TYPE_ALLOCATORS
+RV NO_RELATIVE_DELAY
+RV NO_STANDARD_ALLOCATORS_AFTER_ELABORATION
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_TASK_ALLOCATORS
+RV NO_TASK_HIERARCHY
+RV NO_TASKING
 RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
+RV MAX_TASKS=1+
+RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U main%b		main.adb		8b56c4cd NE OO SU
+U main%b		main.adb		16dda36f NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
-Z ada.exceptions%s	a-except.adb		a-except.ali
+Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.numerics%s	a-numeri.ads		a-numeri.ali
 W ada.numerics.float_random%s  a-nuflra.adb	a-nuflra.ali
+Z ada.real_time%s	a-reatim.adb		a-reatim.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W rocket_stage%s	rocket_stage.adb	rocket_stage.ali
+Z system%s		system.ads		system.ali
+Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.img_int%s	s-imgint.ads		s-imgint.ali
+Z system.parameters%s	s-parame.adb		s-parame.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.task_info%s	s-tasinf.adb		s-tasinf.ali
 Z system.tasking%s	s-taskin.adb		s-taskin.ali
-Z system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
+Z system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+Z system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+W util%s		util.adb		util.ali
 
 D ada.ads		20210520051132 76789da1 ada%s
 D a-calend.ads		20210520051128 474d9720 ada.calendar%s
+D a-caldel.ads		20210520051128 9f20b83d ada.calendar.delays%s
 D a-except.ads		20210520051128 946f3014 ada.exceptions%s
+D a-finali.ads		20210520051128 bf4f806b ada.finalization%s
 D a-ioexce.ads		20210520051128 e4a01f64 ada.io_exceptions%s
 D a-numeri.ads		20210520051130 84bea7a3 ada.numerics%s
 D a-nuflra.ads		20210520051130 4056ab7a ada.numerics.float_random%s
+D a-reatim.ads		20210520051128 0240fc73 ada.real_time%s
 D a-stream.ads		20210520051130 119b8fb3 ada.streams%s
 D a-string.ads		20210520051130 90ac6797 ada.strings%s
 D a-sttebu.ads		20210520051130 18209c64 ada.strings.text_buffers%s
@@ -45,12 +70,16 @@ D interfac.ads		20210520051132 edec285f interfaces%s
 D i-c.ads		20210520051132 d9beded9 interfaces.c%s
 D i-cstrin.ads		20210520051132 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20210520051132 e53d8b8e interfaces.c_streams%s
-D main.adb		20250501142030 22b92dfa main%b
+D main.adb		20250504103356 028a0abe main%b
+D rocket_stage.ads	20250504103416 602d826a rocket_stage%s
 D system.ads		20210520051136 2ffa5114 system%s
 D s-atacco.ads		20210520051132 4c36d12f system.address_to_access_conversions%s
 D s-crtl.ads		20210520051132 0ebbdb71 system.crtl%s
 D s-exctab.ads		20210520051132 54135002 system.exception_table%s
 D s-ficobl.ads		20210520051132 078245e4 system.file_control_block%s
+D s-finroo.ads		20210520051132 4ff27390 system.finalization_root%s
+D s-imagei.ads		20210520051134 0d3f86a7 system.image_i%s
+D s-imgint.ads		20210520051134 bdb6f5ec system.img_int%s
 D s-multip.ads		20210520051134 38ac9f73 system.multiprocessors%s
 D s-osinte.ads		20210520051128 97504df8 system.os_interface%s
 D s-parame.ads		20210520051134 4752c4cb system.parameters%s
@@ -65,42 +94,62 @@ D s-stoele.ads		20210520051134 2dc34a04 system.storage_elements%s
 D s-stoele.adb		20210520051134 ed88f8fb system.storage_elements%b
 D s-tasinf.ads		20210520051128 601f6b72 system.task_info%s
 D s-taspri.ads		20210520051128 a1350802 system.task_primitives%s
+D s-taprop.ads		20210520051128 6eefbe12 system.task_primitives.operations%s
 D s-taskin.ads		20210520051128 88fba9ad system.tasking%s
 D s-taprob.ads		20210520051128 acd6094d system.tasking.protected_objects%s
+D s-tpoben.ads		20210520051128 60ad3dae system.tasking.protected_objects.entries%s
+D s-tasren.ads		20210520051128 a67a9949 system.tasking.rendezvous%s
+D s-tassta.ads		20210520051128 cca55c94 system.tasking.stages%s
 D s-traent.ads		20210520051134 26a8d361 system.traceback_entries%s
 D s-unstyp.ads		20210520051134 2b077493 system.unsigned_types%s
 D s-wchcon.ads		20210520051136 1b7d22d2 system.wch_con%s
 D s-win32.ads		20210520051136 15ac53fb system.win32%s
 D unchconv.ads		20210520051136 ca2f9e18 unchecked_conversion%s
+D util.ads		20250501150108 dd95c28c util%s
 G a e
 G c Z b b [main standard 4 11 none]
+G r p none [main standard 4 11 none] [init util__gen_failure 11 17 none]
+G r s propellant_tank [main standard 4 11 none] [propellant_tankVIP rocket_stage 3 4 none]
+G r p none [main standard 4 11 none] [init rocket_stage__propellant_tank 5 17 none]
+G r s stage [main standard 4 11 none] [stageVIP rocket_stage 25 4 none]
+G r r none [main standard 4 11 none] [init rocket_stage__stage 26 13 none]
+G r r none [main standard 4 11 none] [start_engines rocket_stage__stage 27 13 none]
+G r p none [main standard 4 11 none] [p util__printer 7 17 none]
 X 1 ada.ads
-16K9*Ada 20e8 18|1r6 1r19 1r46 2r5 2r18 2r45
+16K9*Ada 20e8 21|1r6 1r19 1r46 2r5 2r18 2r45
 X 2 a-calend.ads
-36K13*Calendar 413e17 18|1w50 2r49
-X 5 a-numeri.ads
-16K13*Numerics 35e17 18|1r23 2r22
-X 6 a-nuflra.ads
-41K22*Float_Random 74e30 18|1w32 2r31
-47R9*Generator<28|65R9> 18|21r10
-49F12*Uniformly_Distributed{float}
-51V13*Random{49F12}<28|73p13> 18|33s17 37s23
-53U14*Reset<28|103p14> 18|28s10
-X 12 a-textio.ads
-58K13*Text_IO 725e16 18|1w10 2r9
-506U14*Put_Line 18|12s10
-X 18 main.adb
-4U11*Main 4b11 46l5 46t9
-5w14 Printer 9b19 14l8 14t15
-6U17 P 6>19 10b17 13l11 13t12
-6a19 S{string} 10b19 12r19
-16w14 Gen_Failure 24b19 41l8 41t19
-17U17 Init 26b17 29l11 29t15
-18V16 Generate{float} 31b16 34l11 34t19
-19V16 failure{boolean} 36b16 40l11 40t18
-21r7 G{6|47R9} 28r16 33r24 37r31
-37f10 R{float} 39r17
-X 32 s-stausa.ads
+36K13*Calendar 413e17 21|1w50 2r49
+X 7 a-numeri.ads
+16K13*Numerics 35e17 21|1r23 2r22
+X 8 a-nuflra.ads
+41K22*Float_Random 74e30 21|1w32 2r31
+X 15 a-textio.ads
+58K13*Text_IO 725e16 21|1w10 2r9
+X 21 main.adb
+4U11*Main 4b11 34l5 34t9
+6X4 Catastrophic_Failure
+8t9 Flight_Computer 10b14 29l8 29t23
+11i7 num{natural} 21r31
+23i11 I{integer} 24r20
+X 22 rocket_stage.ads
+1K9*Rocket_Stage 21|1w66 2r65 22|35e17
+3W19*Propellant_Tank 21|14r29 15r32 22|11e23
+5U17 Init 21|17s23 18s25
+13P9*Tank(3W19)
+14p4*Core_Stage_Tank{13P9} 21|14m7 17r7 22r46
+14p21*Second_Stage_Tank{13P9} 21|15m7 18r7
+25T14*Stage 21|21r25 22|29e13
+26Y13 Init 21|22s18
+27Y13 Start_Engines 21|27s18
+31P9*En_Stage(25T14)
+33p4*Core_Stage{31P9} 21|21m7 22r7 27r7
+X 39 s-stausa.ads
 208U14*Initialize 209i<c,__gnat_stack_usage_initialize>22
 273U14*Output_Results 277i<c,__gnat_stack_usage_output_results>22
+X 56 util.ads
+4K9*Util 21|1w60 2r59 56|18e9
+6w14*Printer 21|24r10 28r7
+7U17 P 21|24s18 28s15
+10w14*Gen_Failure 21|13r7
+11U17 Init 21|13s19
 
