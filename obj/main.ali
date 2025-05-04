@@ -28,7 +28,7 @@ RV NO_IMPLEMENTATION_PRAGMAS
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U main%b		main.adb		16dda36f NE OO SU
+U main%b		main.adb		966c5b93 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
@@ -70,8 +70,8 @@ D interfac.ads		20210520051132 edec285f interfaces%s
 D i-c.ads		20210520051132 d9beded9 interfaces.c%s
 D i-cstrin.ads		20210520051132 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20210520051132 e53d8b8e interfaces.c_streams%s
-D main.adb		20250504103356 028a0abe main%b
-D rocket_stage.ads	20250504103416 602d826a rocket_stage%s
+D main.adb		20250504104240 330a22d6 main%b
+D rocket_stage.ads	20250504104340 d11c52fe rocket_stage%s
 D system.ads		20210520051136 2ffa5114 system%s
 D s-atacco.ads		20210520051132 4c36d12f system.address_to_access_conversions%s
 D s-crtl.ads		20210520051132 0ebbdb71 system.crtl%s
@@ -111,9 +111,9 @@ G c Z b b [main standard 4 11 none]
 G r p none [main standard 4 11 none] [init util__gen_failure 11 17 none]
 G r s propellant_tank [main standard 4 11 none] [propellant_tankVIP rocket_stage 3 4 none]
 G r p none [main standard 4 11 none] [init rocket_stage__propellant_tank 5 17 none]
-G r s stage [main standard 4 11 none] [stageVIP rocket_stage 25 4 none]
-G r r none [main standard 4 11 none] [init rocket_stage__stage 26 13 none]
-G r r none [main standard 4 11 none] [start_engines rocket_stage__stage 27 13 none]
+G r s stage [main standard 4 11 none] [stageVIP rocket_stage 31 4 none]
+G r r none [main standard 4 11 none] [init rocket_stage__stage 32 13 none]
+G r r none [main standard 4 11 none] [start_engines rocket_stage__stage 33 13 none]
 G r p none [main standard 4 11 none] [p util__printer 7 17 none]
 X 1 ada.ads
 16K9*Ada 20e8 21|1r6 1r19 1r46 2r5 2r18 2r45
@@ -132,17 +132,17 @@ X 21 main.adb
 11i7 num{natural} 21r31
 23i11 I{integer} 24r20
 X 22 rocket_stage.ads
-1K9*Rocket_Stage 21|1w66 2r65 22|35e17
-3W19*Propellant_Tank 21|14r29 15r32 22|11e23
+1K9*Rocket_Stage 21|1w66 2r65 22|41e17
+3W19*Propellant_Tank 21|14r29 15r32 22|17e23
 5U17 Init 21|17s23 18s25
-13P9*Tank(3W19)
-14p4*Core_Stage_Tank{13P9} 21|14m7 17r7 22r46
-14p21*Second_Stage_Tank{13P9} 21|15m7 18r7
-25T14*Stage 21|21r25 22|29e13
-26Y13 Init 21|22s18
-27Y13 Start_Engines 21|27s18
-31P9*En_Stage(25T14)
-33p4*Core_Stage{31P9} 21|21m7 22r7 27r7
+19P9*Tank(3W19)
+20p4*Core_Stage_Tank{19P9} 21|14m7 17r7 22r46
+20p21*Second_Stage_Tank{19P9} 21|15m7 18r7
+31T14*Stage 21|21r25 22|35e13
+32Y13 Init 21|22s18
+33Y13 Start_Engines 21|27s18
+37P9*En_Stage(31T14)
+39p4*Core_Stage{37P9} 21|21m7 22r7 27r7
 X 39 s-stausa.ads
 208U14*Initialize 209i<c,__gnat_stack_usage_initialize>22
 273U14*Output_Results 277i<c,__gnat_stack_usage_output_results>22

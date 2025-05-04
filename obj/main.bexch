@@ -4,6 +4,8 @@ b__main.o
 B:\college\ada\BigAssignment2\default.gpr
 20250501113718 bc1eeaddf4b514ace78ef0c3ccaa3324
 [BOUND OBJECT FILES]
+B:\college\ada\BigAssignment2\obj\util.o
+B:\college\ada\BigAssignment2\obj\rocket_stage.o
 B:\college\ada\BigAssignment2\obj\main.o
 [GENERATED SOURCE FILES]
 b__main.ads

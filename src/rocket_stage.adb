@@ -2,13 +2,10 @@ with Util, Ada.Calendar;
 use Util,Ada.Calendar;
 package body Rocket_Stage is
 
-   protected type Propellant_Tank is
-      Max_O: Float := 0.0;
-      Max_RF: Float:=0.0;
-      Current_O:Float:=0.0;
-      Current_RF: Float:=0.0;
+   protected body Propellant_Tank is
+     
       
-      procedure Init(O: in Float, RF: in Float) is
+      procedure Init(O: in Float; RF: in Float) is
       begin
          Max_O := O;
          Max_RF := RF;
@@ -23,7 +20,7 @@ package body Rocket_Stage is
             Current_O := Current_O - Dif;
          else
             Current_O := 0.0;
-         end if
+         end if;
       end D_O;
       
       procedure D_RF(T: in Float) is
@@ -42,8 +39,10 @@ package body Rocket_Stage is
       end Get_P_O;
       
       function Get_P_RF return Float is
+      begin
          return (Current_RF / Max_RF) * 100.0;
-      end Propellant_Tank;
+      end Get_P_RF;
+   end Propellant_Tank;
       
       
       task body Raptor_Engine is
@@ -56,18 +55,18 @@ package body Rocket_Stage is
       begin
          
          accept Init(S:String; N:Integer; PT:Tank) do
-            Engine_Name:= S;
+            Engine_Name:= new String'(S);
             Engine_Num:= N;
             Engine_Tank:= PT;
          end Init;
          
          accept Engine_Start do
-            printer.P(Engine_Name & " engine " & Engine_Num "is starting");
+            printer.P(Engine_Name.all & " engine " & Engine_Num'Image & "is starting");
          end Engine_Start;
          loop
             select
                accept Engine_Shut_Off do
-                  Printer.P(Engine_Name & " engine " & Engine_Num & " is shutting off");
+                  Printer.P(Engine_Name.all & " engine " & Engine_Num'Image & " is shutting off");
                end Engine_Shut_Off;
                exit;
             or
@@ -80,36 +79,36 @@ package body Rocket_Stage is
          end loop;
       end Raptor_Engine;
       
-      task body Stage(Num_Engines: Natural) is
+      task body Stage is
          type Pstr is access String;
          Stage_Name: Pstr;
          Fuel_Tank: Tank;
          Engines: Engine_Arr(1..Num_Engines);
       begin
          accept Init(S: String; PT: Tank) do
-            Stage_Name := S;
+            Stage_Name := new String'(S);
             Fuel_Tank := PT; 
          end Init;
-         accept Start_Engine do
-            Printer.P("Main Engines on" & Stage_Name & "Starting");
+         accept Start_Engines do
+            Printer.P("Main Engines on" & Stage_Name.all & "Starting");
             for I in Engines'Range loop
                Engines(i).Engine_Start;
             end loop;
-         end Start_Engine;
+         end Start_Engines;
          loop
             select 
                accept MECO do
                   for I in Engines'Range loop
                      Engines(i).Engine_Shut_Off;
                   end loop;
-                  Printer.P("Main engines on " & Stage_Name & " shut down");
+                  Printer.P("Main engines on " & Stage_Name.all & " shut down");
                end MECO;
                exit;
             or
                terminate;
             end select;
                
-         
+         end loop;
       end Stage;
                
 end Rocket_Stage;

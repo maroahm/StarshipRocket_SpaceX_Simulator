@@ -24,7 +24,7 @@ package body Util is
       
       function failure return Boolean is
       begin
-         if G < 0.0001 then
+         if Random(G) < 0.0001 then
             return True;
          else
             return false;

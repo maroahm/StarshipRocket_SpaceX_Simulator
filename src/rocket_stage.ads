@@ -8,6 +8,12 @@ package Rocket_Stage is
       function Get_P_O return Float; 
       function Get_P_RF return Float;
       
+   private
+       Max_O: Float := 0.0;
+      Max_RF: Float:=0.0;
+      Current_O:Float:=0.0;
+      Current_RF: Float:=0.0;
+      
    end Propellant_Tank;
    
    type Tank is access Propellant_Tank;

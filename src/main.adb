@@ -25,7 +25,7 @@ procedure Main is
          delay 1.0;
       end loop;
       Core_Stage.Start_Engines;
-      Printer.P("We have lift off!S");
+      Printer.P("We have lift off!");
    end Flight_Computer;
 begin
 
