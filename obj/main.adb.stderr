@@ -1,1 +1,0 @@
-main.adb:23:26: warning: loop range is null, loop will not execute [enabled by default]

@@ -8,6 +8,7 @@ RN
 RV NO_ALLOCATORS
 RV NO_CALENDAR
 RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
 RV NO_EXCEPTION_HANDLERS
 RV NO_EXCEPTIONS
 RV NO_FIXED_POINT
@@ -32,7 +33,7 @@ RV MAX_TASK_ENTRIES=3
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U rocket_stage%b	rocket_stage.adb	eea5a81b OO PK
+U rocket_stage%b	rocket_stage.adb	c240d5c9 OO PK
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
@@ -79,8 +80,8 @@ D interfac.ads		20210520051132 edec285f interfaces%s
 D i-c.ads		20210520051132 d9beded9 interfaces.c%s
 D i-cstrin.ads		20210520051132 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20210520051132 e53d8b8e interfaces.c_streams%s
-D rocket_stage.ads	20250504104340 d11c52fe rocket_stage%s
-D rocket_stage.adb	20250504105414 a561af49 rocket_stage%b
+D rocket_stage.ads	20250506193116 d11c52fe rocket_stage%s
+D rocket_stage.adb	20250506193252 8984d29b rocket_stage%b
 D system.ads		20210520051136 2ffa5114 system%s
 D s-atacco.ads		20210520051132 4c36d12f system.address_to_access_conversions%s
 D s-conca3.ads		20210520051132 0b705ca5 system.concat_3%s
@@ -159,19 +160,19 @@ X 1 ada.ads
 16K9*Ada 20e8 21|1r12 2r10
 X 2 a-calend.ads
 36K13*Calendar 413e17 21|1w16 2r14
-42I9*Time<226I9> 21|54r13
-56V13*Clock{42I9} 21|54s20 74s20
-112V14*"-"{duration} 21|74s26
+42I9*Time<226I9> 21|54r11 55r10
+56V13*Clock{42I9} 21|54s18 78s18
+112V14*"-"{duration} 21|80s23
 226I9 Time_Rep<long_long_integer>
 X 20 rocket_stage.ads
-1K9*Rocket_Stage 41l5 41e17 21|3b14 114l5 114t17
+1K9*Rocket_Stage 41l5 41e17 21|3b14 122l5 122t17
 3W19*Propellant_Tank 12E8 17l8 17e23 19r24 21|5b19 45l8 45t23
 5U17 Init 5>22 5>35 21|8b17 14l11 14t15
 5f22 O{float} 21|8b22 10r19 12r23
 5f35 RF{float} 21|8b35 11r20 13r24
-6U17 D_O 6>21 21|16b17 24l11 24t14 75s28
+6U17 D_O 6>21 21|16b17 24l11 24t14 81s28
 6f21 T{float} 21|16b21 17r31
-7U17 D_RF 7>22 21|26b17 34l11 34t15 76s28
+7U17 D_RF 7>22 21|26b17 34l11 34t15 82s28
 7f22 T{float} 21|26b22 27r29
 8V16 Get_P_O{float} 21|36b16 39l11 39t18
 9V16 Get_P_RF{float} 21|41b16 44l11 44t19
@@ -179,52 +180,54 @@ X 20 rocket_stage.ads
 13f7 Max_RF{float} 21|11r10 43r31
 14f7 Current_O{float} 21|12r10 19r13 20r13 20r26 22r13 38r18
 15f7 Current_RF{float} 21|13r10 29r13 30r13 30r27 32r13 43r18
-19P9*Tank(3W19) 20r40 24r42 32r33 21|52r23 57r46 85r21 88r37
+19P9*Tank(3W19) 20r40 24r42 32r33 21|52r20 59r43 94r34
 20p4*Core_Stage_Tank{19P9}
 20p21*Second_Stage_Tank{19P9}
-23T14*Raptor_Engine 27l8 27e21 29r51 21|48b17 80l11 80t24
-24Y13 Init 24>18 24>28 24>39 21|57b17 61l14 61t18
-24a18 S{string} 21|58r39
-24i28 N{integer} 21|59r26
-24p39 PT{19P9} 21|60r27
-25Y13 Engine_Start 21|63b17 65l14 65t26 95s27
-26Y13 Engine_Shut_Off 21|68b23 70l20 70t35 102s33
-29A9*Engine_Arr(23T14)<integer> 21|86r19
-31T14*Stage 31d20 35l8 35e13 37r28 21|82b17 112l11 112t16
-31i20 Num_Engines{natural} 21|86r33
-32Y13 Init 32>18 32>29 21|88b17 91l14 91t18
-32a18 S{string} 21|89r39
-32p29 PT{19P9} 21|90r26
-33Y13 Start_Engines 21|92b17 97l14 97t27
-34Y13 MECO 21|100b23 105l20 105t24
+23T14*Raptor_Engine 27l8 27e21 29r51 21|48b14 87l8 87t21
+24Y13 Init 24>18 24>28 24>39 21|59b14 64l11 64t15 97s24
+24a18 S{string} 21|60r36
+24i28 N{integer} 21|61r23
+24p39 PT{19P9} 21|62r24
+25Y13 Engine_Start 21|66b14 68l11 68t23 103s24
+26Y13 Engine_Shut_Off 21|71b20 74l17 74t32 110s30
+29A9*Engine_Arr(23T14)<integer> 21|92r16
+31T14*Stage 31d20 35l8 35e13 37r28 21|89b14 120l8 120t13
+31i20 Num_Engines{natural} 21|92r30 96r22 102r22
+32Y13 Init 32>18 32>29 21|94b14 99l11 99t15
+32a18 S{string} 21|95r35 97r29
+32p29 PT{19P9} 21|97r35
+33Y13 Start_Engines 21|100b14 105l11 105t24
+34Y13 MECO 21|108b20 113l17 113t21
 37P9*En_Stage(31T14) 39r30
 39p4*Core_Stage{37P9}
 39p16*Second_Stage{37P9}
 X 21 rocket_stage.adb
 17f10 Dif{float} 19r25 20r38
 27f10 Dif{float} 29r26 30r40
-49P15 PStr(string) 50r23
-50p10 Engine_Name{49P15} 58m13 64r23 69r29
-51i10 Engine_Num{integer} 59m13 64r54 69r60
-52p10 Engine_Tank{20|19P9} 60m13 75r16 76r16
-53o10 D{duration} 74m16 75r38 76r39
-54i10 T{2|42I9} 74r28
-57a22 S{string}
-57i32 N{integer}
-57p43 PT{20|19P9}
-83P15 Pstr(string) 84r22
-84p10 Stage_Name{83P15} 89m13 93r43 104r50
-85p10 Fuel_Tank{20|19P9} 90m13
-86a10 Engines{20|29A9} 94r22 95r16 101r28 102r22
-88a22 S{string}
-88p33 PT{20|19P9}
-94i17 I{integer} 95r24
-101i23 I{integer} 102r30
+49P12 PStr(string) 50r20
+50p7 Engine_Name{49P12} 60m10 67r20 72r26
+51i7 Engine_Num{integer} 61m10 67r51 72r57
+52p7 Engine_Tank{20|19P9} 62m10 79r42 81r16 82r16
+53o7 D{duration} 80m16 81r38 82r39
+54i7 T1{2|42I9} 80r25
+55i7 T2{2|42I9} 78m13 80r20
+56b7 Flight_Terminated{boolean} 73m16 79r20
+59a19 S{string}
+59i29 N{integer}
+59p40 PT{20|19P9}
+90P12 Pstr(string) 91r19
+91p7 Stage_Name{90P12} 95m10 101r41 112r47
+92a7 Engines{20|29A9} 97r13 103r13 109r25 110r19
+94a19 S{string}
+94p30 PT{20|19P9}
+96i14 i{integer} 97r21 97r32
+102i14 I{integer} 103r21
+109i20 I{integer} 110r27
 X 40 s-stausa.ads
 208U14*Initialize 209i<c,__gnat_stack_usage_initialize>22
 273U14*Output_Results 277i<c,__gnat_stack_usage_output_results>22
 X 57 util.ads
 4K9*Util 21|1w6 2r5 57|18e9
-6w14*Printer 21|64r13 69r19 93r13 104r19
-7U17 P 21|64s21 69s27 93s21 104s27
+6w14*Printer 21|67r10 72r16 101r10 112r16
+7U17 P 21|67s18 72s24 101s18 112s24
 

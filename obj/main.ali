@@ -9,6 +9,7 @@ RN
 RV NO_ALLOCATORS
 RV NO_CALENDAR
 RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
 RV NO_FIXED_POINT
 RV NO_FLOATING_POINT
 RV NO_IO
@@ -28,7 +29,7 @@ RV NO_IMPLEMENTATION_PRAGMAS
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U main%b		main.adb		966c5b93 NE OO SU
+U main%b		main.adb		46ab86c4 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
@@ -39,7 +40,9 @@ Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W rocket_stage%s	rocket_stage.adb	rocket_stage.ali
 Z system%s		system.ads		system.ali
+Z system.concat_2%s	s-conca2.adb		s-conca2.ali
 Z system.exception_table%s  s-exctab.adb	s-exctab.ali
+Z system.img_flt%s	s-imgflt.ads		s-imgflt.ali
 Z system.img_int%s	s-imgint.ads		s-imgint.ali
 Z system.parameters%s	s-parame.adb		s-parame.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
@@ -70,19 +73,25 @@ D interfac.ads		20210520051132 edec285f interfaces%s
 D i-c.ads		20210520051132 d9beded9 interfaces.c%s
 D i-cstrin.ads		20210520051132 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20210520051132 e53d8b8e interfaces.c_streams%s
-D main.adb		20250504104240 330a22d6 main%b
-D rocket_stage.ads	20250504104340 d11c52fe rocket_stage%s
+D main.adb		20250506194620 e3cdff81 main%b
+D rocket_stage.ads	20250506193116 d11c52fe rocket_stage%s
 D system.ads		20210520051136 2ffa5114 system%s
 D s-atacco.ads		20210520051132 4c36d12f system.address_to_access_conversions%s
+D s-conca2.ads		20210520051132 02a0d7d0 system.concat_2%s
 D s-crtl.ads		20210520051132 0ebbdb71 system.crtl%s
 D s-exctab.ads		20210520051132 54135002 system.exception_table%s
 D s-ficobl.ads		20210520051132 078245e4 system.file_control_block%s
 D s-finroo.ads		20210520051132 4ff27390 system.finalization_root%s
 D s-imagei.ads		20210520051134 0d3f86a7 system.image_i%s
+D s-imager.ads		20210520051134 500b11a9 system.image_r%s
+D s-imageu.ads		20210520051134 525c30c6 system.image_u%s
+D s-imgflt.ads		20210520051134 78689de8 system.img_flt%s
 D s-imgint.ads		20210520051134 bdb6f5ec system.img_int%s
+D s-imguns.ads		20210520051134 0e4da2ac system.img_uns%s
 D s-multip.ads		20210520051134 38ac9f73 system.multiprocessors%s
 D s-osinte.ads		20210520051128 97504df8 system.os_interface%s
 D s-parame.ads		20210520051134 4752c4cb system.parameters%s
+D s-powflt.ads		20210520051134 46f7a1b9 system.powten_flt%s
 D s-putima.ads		20210520051134 4e095881 system.put_images%s
 D s-rannum.ads		20210520051134 c3978523 system.random_numbers%s
 D s-secsta.ads		20210520051134 9b3ab94b system.secondary_stack%s
@@ -113,8 +122,12 @@ G r s propellant_tank [main standard 4 11 none] [propellant_tankVIP rocket_stage
 G r p none [main standard 4 11 none] [init rocket_stage__propellant_tank 5 17 none]
 G r s stage [main standard 4 11 none] [stageVIP rocket_stage 31 4 none]
 G r r none [main standard 4 11 none] [init rocket_stage__stage 32 13 none]
-G r r none [main standard 4 11 none] [start_engines rocket_stage__stage 33 13 none]
 G r p none [main standard 4 11 none] [p util__printer 7 17 none]
+G r r none [main standard 4 11 none] [start_engines rocket_stage__stage 33 13 none]
+G r p none [main standard 4 11 none] [get_p_o rocket_stage__propellant_tank 8 16 none]
+G r p none [main standard 4 11 none] [get_p_rf rocket_stage__propellant_tank 9 16 none]
+G r p none [main standard 4 11 none] [failure util__gen_failure 13 16 none]
+G r r none [main standard 4 11 none] [meco rocket_stage__stage 34 13 none]
 X 1 ada.ads
 16K9*Ada 20e8 21|1r6 1r19 1r46 2r5 2r18 2r45
 X 2 a-calend.ads
@@ -126,30 +139,35 @@ X 8 a-nuflra.ads
 X 15 a-textio.ads
 58K13*Text_IO 725e16 21|1w10 2r9
 X 21 main.adb
-4U11*Main 4b11 34l5 34t9
+4U11*Main 4b11 63l5 63t9
 6X4 Catastrophic_Failure
-8t9 Flight_Computer 10b14 29l8 29t23
+8t9 Flight_Computer 10b14 58l8 58t23
 11i7 num{natural} 21r31
-23i11 I{integer} 24r20
+23i11 I{integer} 24r34
 X 22 rocket_stage.ads
 1K9*Rocket_Stage 21|1w66 2r65 22|41e17
 3W19*Propellant_Tank 21|14r29 15r32 22|17e23
 5U17 Init 21|17s23 18s25
+8V16 Get_P_O{float} 21|29s29 32s38 47s31 51s72
+9V16 Get_P_RF{float} 21|29s64 34s38 48s27 50s76
 19P9*Tank(3W19)
-20p4*Core_Stage_Tank{19P9} 21|14m7 17r7 22r46
-20p21*Second_Stage_Tank{19P9} 21|15m7 18r7
-31T14*Stage 21|21r25 22|35e13
-32Y13 Init 21|22s18
-33Y13 Start_Engines 21|27s18
+20p4*Core_Stage_Tank{19P9} 21|14m7 17r7 22r46 29r13 29r48 32r22 34r22
+20p21*Second_Stage_Tank{19P9} 21|15m7 18r7 44r37 47r13 48r9 50r58 51r54
+31T14*Stage 21|21r25 43r27 22|35e13
+32Y13 Init 21|22s18 44s20
+33Y13 Start_Engines 21|27s18 46s20
+34Y13 MECO 21|36s24 39s18 53s26 56s20
 37P9*En_Stage(31T14)
-39p4*Core_Stage{37P9} 21|21m7 22r7 27r7
-X 39 s-stausa.ads
+39p4*Core_Stage{37P9} 21|21m7 22r7 27r7 36r13 39r7
+39p16*Second_Stage{37P9} 21|43m7 44r7 46r7 53r13 56r7
+X 45 s-stausa.ads
 208U14*Initialize 209i<c,__gnat_stack_usage_initialize>22
 273U14*Output_Results 277i<c,__gnat_stack_usage_output_results>22
-X 56 util.ads
-4K9*Util 21|1w60 2r59 56|18e9
-6w14*Printer 21|24r10 28r7
-7U17 P 21|24s18 28s15
-10w14*Gen_Failure 21|13r7
+X 62 util.ads
+4K9*Util 21|1w60 2r59 62|18e9
+6w14*Printer 21|24r10 28r7 31r10 33r10 41r7 50r10 51r10 57r7
+7U17 P 21|24s18 28s15 31s18 33s18 41s15 50s18 51s18 57s15
+10w14*Gen_Failure 21|13r7 35r13 52r13
 11U17 Init 21|13s19
+13V16 failure{boolean} 21|35s25 52s25
 
